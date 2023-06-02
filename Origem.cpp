@@ -9,18 +9,20 @@ Aluno(s): Matheus Piltz Scariot
 #include <string>
 
 struct No {
+	No* parent;
 	No* left;
 	No* right;
 	int value;
 };
 
-void insert(No*& root, int value); //ok
+void insertRecursive(No*& root, int value, No* nodeParent = NULL); //ok
+void insert(No*& tree, int value);
 void escreve_ordenado(); // escreve em percurso em-ordem
 int minimum(No* root); //ok
 int maximum(No* root); // ok
 int sucessor(No* root, int value);
 int procecessor(No* root, int value);
-int search(No*& root, int value); // ok
+No* search(No*& root, int value); // ok
 char remove(No* root, int value);
 void limpa(No* root);
 void copia(No* original, No* copy);
@@ -49,8 +51,13 @@ int main() {
 }
 
 void insert(No*& tree, int value) {
+	insertRecursive(tree, value, NULL);
+}
+
+void insertRecursive(No*& tree, int value, No* nodeParent) {
 	if (!tree) {
 		tree = (No*)calloc(1, sizeof(No));
+		tree->parent = nodeParent;
 		tree->value = value;
 		tree->right = NULL;
 		tree->left = NULL;
@@ -59,22 +66,22 @@ void insert(No*& tree, int value) {
 	}
 
 	if (tree->value < value) {
-		insert(tree->right, value);
+		insertRecursive(tree->right, value, tree);
 	}
 	else {
-		insert(tree->left, value);
+		insertRecursive(tree->left, value, tree);
 	}
 }
 
-int search(No*& tree, int value) {
+No* search(No*& tree, int value) {
 	if (!tree) {
 		std::cout << "Não encontrado";
-		return -1;
+		return NULL;
 	}
 
 	if (tree->value == value) {
 		std::cout << tree->value;
-		return tree->value;
+		return tree;
 	}
 
 	if (tree->value < value) {
@@ -103,4 +110,12 @@ int maximum(No* root) {
 	}
 
 	return maximum(root->right);
+}
+
+int sucessor(No* root, int value) {
+	if (!root->right) {
+
+	}
+
+	return 0;
 }

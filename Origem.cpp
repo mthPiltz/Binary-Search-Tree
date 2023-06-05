@@ -22,10 +22,10 @@ int minimum(No* root); //ok
 int maximum(No* root); // ok
 int sucessor(No* root, int value); //ok
 int predecessor(No* root, int value); //ok
-No* search(No*& root, int value); // ok
+No* search(No*& root, int value); //ok
 char remove(No* root, int value);
-void limpa(No* root);
-void copia(No* original, No* copy);
+void clean(No*& root); //ok
+void copy(No* original, No* copy);
 
 int main() {
 	No* root = NULL;
@@ -46,6 +46,8 @@ int main() {
 	insert(root, 21);
 	insert(root, 23);
 	
+	writeInOrder(root);
+	clean(root);
 	writeInOrder(root);
 }
 
@@ -152,5 +154,13 @@ void writeInOrder(No*& root) {
 		std::cout << root->value;
 		std::cout << " ";
 		writeInOrder(root->right);
+	}
+}
+
+void clean(No*& root) {
+	if (root) {
+		clean(root->left);
+		clean(root->right);
+		memset(root, 0, sizeof(*root));
 	}
 }

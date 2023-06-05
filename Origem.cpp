@@ -21,7 +21,7 @@ void escreve_ordenado(); // escreve em percurso em-ordem
 int minimum(No* root); //ok
 int maximum(No* root); // ok
 int sucessor(No* root, int value); //ok
-int predecessor(No* root, int value);
+int predecessor(No* root, int value); //ok
 No* search(No*& root, int value); // ok
 char remove(No* root, int value);
 void limpa(No* root);
@@ -46,7 +46,7 @@ int main() {
 	insert(root, 21);
 	insert(root, 23);
 	
-	int a = sucessor(root, 23);
+	int a = predecessor(root, 23);
 	std::cout << a;
 }
 
@@ -120,9 +120,29 @@ int sucessor(No* root, int value) {
 		if (atual->parent->value < value) {
 			atual = atual->parent;
 		}
-		else
-		{
-			return atual->parent->value;		}
+		else{
+			return atual->parent->value;		
+		}
 	}
+	return -1;
+}
+
+int predecessor(No* root, int value) {
+	No* atual = search(root, value);
+
+	if (atual->left) {
+		return maximum(atual->left);
+	}
+
+	while (atual->parent)
+	{
+		if (atual->parent->value > value) {
+			atual = atual->parent;
+		}
+		else {
+			return atual->parent->value;		
+		}
+	}
+
 	return -1;
 }

@@ -20,8 +20,8 @@ void insert(No*& tree, int value);
 void escreve_ordenado(); // escreve em percurso em-ordem
 int minimum(No* root); //ok
 int maximum(No* root); // ok
-int sucessor(No* root, int value);
-int procecessor(No* root, int value);
+int sucessor(No* root, int value); //ok
+int predecessor(No* root, int value);
 No* search(No*& root, int value); // ok
 char remove(No* root, int value);
 void limpa(No* root);
@@ -46,8 +46,8 @@ int main() {
 	insert(root, 21);
 	insert(root, 23);
 	
-	minimum(root);
-	maximum(root);
+	int a = sucessor(root, 23);
+	std::cout << a;
 }
 
 void insert(No*& tree, int value) {
@@ -80,7 +80,6 @@ No* search(No*& tree, int value) {
 	}
 
 	if (tree->value == value) {
-		std::cout << tree->value;
 		return tree;
 	}
 
@@ -94,8 +93,6 @@ No* search(No*& tree, int value) {
 
 int minimum(No* root) {
 	if (!root->left) {
-		std::cout << root->value;
-		std::cout << "\n";
 		return root->value;
 	}
 
@@ -104,8 +101,6 @@ int minimum(No* root) {
 
 int maximum(No* root) {
 	if (!root->right) {
-		std::cout << root->value;
-		std::cout << "\n";
 		return root->value;
 	}
 
@@ -113,9 +108,21 @@ int maximum(No* root) {
 }
 
 int sucessor(No* root, int value) {
-	if (!root->right) {
-
+	No* atual = search(root, value);
+	
+	if (atual->right) {
+		return minimum(atual->right);
 	}
 
-	return 0;
+	No* sucessor = NULL;
+
+	while (atual->parent) {
+		if (atual->parent->value < value) {
+			atual = atual->parent;
+		}
+		else
+		{
+			return atual->parent->value;		}
+	}
+	return -1;
 }

@@ -18,18 +18,14 @@ struct No {
 void insertRecursive(No*& root, int value, No* nodeParent = NULL); //ok
 void insert(No*& tree, int value); //ok
 void writeInOrder(No*& root); //ok
-int minimum(No* root); //ok
-int maximum(No* root); // ok
-int sucessor(No* root, int value); //ok
-int predecessor(No* root, int value); //ok
+No* minimum(No* root); //ok
+No* maximum(No* root); // ok
+No* sucessor(No* root, int value); //ok
+No* predecessor(No* root, int value); //ok
 No* search(No*& root, int value); //ok
-char remove(No* root, int value);
+bool remove(No* root, int value); //ok
 void clean(No*& root); //ok
-<<<<<<< HEAD
-void copy(No*& original, No*& copy);
-=======
-void copy(No* original, No* copy);
->>>>>>> 4268ea99a396b33c774b3d91c4ef79742b8a8a82
+void copy(No* original, No*& rootCopy); //ok
 
 int main() {
 	No* root = NULL;
@@ -52,14 +48,9 @@ int main() {
 	insert(root, 23);
 	
 	writeInOrder(root);
-<<<<<<< HEAD
-	copy(root, rootCopy);
 	std::cout << "\n";
-	writeInOrder(rootCopy);
-=======
-	clean(root);
+	remove(root, 20);
 	writeInOrder(root);
->>>>>>> 4268ea99a396b33c774b3d91c4ef79742b8a8a82
 }
 
 void insert(No*& tree, int value) {
@@ -103,23 +94,23 @@ No* search(No*& tree, int value) {
 	}
 }
 
-int minimum(No* root) {
+No* minimum(No* root) {
 	if (!root->left) {
-		return root->value;
+		return root;
 	}
 
 	return minimum(root->left);
 }
 
-int maximum(No* root) {
+No* maximum(No* root) {
 	if (!root->right) {
-		return root->value;
+		return root;
 	}
 
 	return maximum(root->right);
 }
 
-int sucessor(No* root, int value) {
+No* sucessor(No* root, int value) {
 	No* current = search(root, value);
 	
 	if (current->right) {
@@ -133,13 +124,13 @@ int sucessor(No* root, int value) {
 			current = current->parent;
 		}
 		else{
-			return current->parent->value;		
+			return current->parent;		
 		}
 	}
-	return -1;
+	return NULL;
 }
 
-int predecessor(No* root, int value) {
+No* predecessor(No* root, int value) {
 	No* current = search(root, value);
 
 	if (current->left) {
@@ -152,15 +143,15 @@ int predecessor(No* root, int value) {
 			current = current->parent;
 		}
 		else {
-			return current->parent->value;		
+			return current->parent;		
 		}
 	}
 
-	return -1;
+	return NULL;
 }
 
 void writeInOrder(No*& root) {
-	if (root) {
+	if (root != nullptr) {
 		writeInOrder(root->left);
 		std::cout << root->value;
 		std::cout << " ";
@@ -174,13 +165,102 @@ void clean(No*& root) {
 		clean(root->right);
 		memset(root, 0, sizeof(*root));
 	}
-<<<<<<< HEAD
 }
 
-void copy(No*& root, No*& copy) {
-	if (root) {
-		copy = root;
+void copy(No* original, No*& rootCopy) {
+	if (original) {
+		rootCopy = (No*)calloc(1, sizeof(No));
+		rootCopy->left = original->left;
+		rootCopy->right = original->right;
+		rootCopy->parent = original->parent;
+		rootCopy->value = original->value;
+
+		copy(original->left, rootCopy->left);
+		copy(original->right, rootCopy->right);
 	}
-=======
->>>>>>> 4268ea99a396b33c774b3d91c4ef79742b8a8a82
+}
+
+bool remove(No* root, int value) {
+	No* current = root;
+	No* parent = nullptr;
+
+	// Localiza o nó a ser removido
+	while (current != nullptr && current->value != value) {
+		parent = current;
+		if (value < current->value) {
+			current = current->left;
+		}
+		else {
+			current = current->right;
+		}
+	}
+
+	// Verifica se o nó foi encontrado
+	if (current == nullptr) {
+		return false; // Nó não encontrado, retorna false
+	}
+
+	// Caso 1: Nó folha
+	if (current->left == nullptr && current->right == nullptr) {
+		if (parent == nullptr) {
+			delete current; // Nó raiz
+		}
+		else if (current == parent->left) {
+			parent->left = nullptr; // Nó filho esquerdo
+		}
+		else {
+			parent->right = nullptr; // Nó filho direito
+		}
+		delete current;
+	}
+	// Caso 2: Nó com apenas um filho
+	else if (current->left == nullptr) {
+		if (parent == nullptr) {
+			root = current->right; // Nó raiz
+		}
+		else if (current == parent->left) {
+			parent->left = current->right; // Nó filho esquerdo
+		}
+		else {
+			parent->right = current->right; // Nó filho direito
+		}
+		delete current;
+	}
+	else if (current->right == nullptr) {
+		if (parent == nullptr) {
+			root = current->left; // Nó raiz
+		}
+		else if (current == parent->left) {
+			parent->left = current->left; // Nó filho esquerdo
+		}
+		else {
+			parent->right = current->left; // Nó filho direito
+		}
+		delete current;
+	}
+	// Caso 3: Nó com dois filhos
+	else {
+		No* successor = current->right;
+		No* successorParent = current;
+
+		// Encontra o nó sucessor (o menor nó na subárvore direita)
+		while (successor->left != nullptr) {
+			successorParent = successor;
+			successor = successor->left;
+		}
+
+		// Atualiza os ponteiros
+		current->value = successor->value;
+
+		if (successor == successorParent->left) {
+			successorParent->left = successor->right;
+		}
+		else {
+			successorParent->right = successor->right;
+		}
+
+		delete successor;
+	}
+
+	return true;
 }

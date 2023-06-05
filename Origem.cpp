@@ -25,7 +25,11 @@ int predecessor(No* root, int value); //ok
 No* search(No*& root, int value); //ok
 char remove(No* root, int value);
 void clean(No*& root); //ok
+<<<<<<< HEAD
 void copy(No*& original, No*& copy);
+=======
+void copy(No* original, No* copy);
+>>>>>>> 4268ea99a396b33c774b3d91c4ef79742b8a8a82
 
 int main() {
 	No* root = NULL;
@@ -48,9 +52,14 @@ int main() {
 	insert(root, 23);
 	
 	writeInOrder(root);
+<<<<<<< HEAD
 	copy(root, rootCopy);
 	std::cout << "\n";
 	writeInOrder(rootCopy);
+=======
+	clean(root);
+	writeInOrder(root);
+>>>>>>> 4268ea99a396b33c774b3d91c4ef79742b8a8a82
 }
 
 void insert(No*& tree, int value) {
@@ -165,10 +174,13 @@ void clean(No*& root) {
 		clean(root->right);
 		memset(root, 0, sizeof(*root));
 	}
+<<<<<<< HEAD
 }
 
 void copy(No*& root, No*& copy) {
 	if (root) {
 		copy = root;
 	}
+=======
+>>>>>>> 4268ea99a396b33c774b3d91c4ef79742b8a8a82
 }

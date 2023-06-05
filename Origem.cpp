@@ -16,8 +16,8 @@ struct No {
 };
 
 void insertRecursive(No*& root, int value, No* nodeParent = NULL); //ok
-void insert(No*& tree, int value);
-void escreve_ordenado(); // escreve em percurso em-ordem
+void insert(No*& tree, int value); //ok
+void writeInOrder(No*& root); //ok
 int minimum(No* root); //ok
 int maximum(No* root); // ok
 int sucessor(No* root, int value); //ok
@@ -46,8 +46,7 @@ int main() {
 	insert(root, 21);
 	insert(root, 23);
 	
-	int a = predecessor(root, 23);
-	std::cout << a;
+	writeInOrder(root);
 }
 
 void insert(No*& tree, int value) {
@@ -145,4 +144,13 @@ int predecessor(No* root, int value) {
 	}
 
 	return -1;
+}
+
+void writeInOrder(No*& root) {
+	if (root) {
+		writeInOrder(root->left);
+		std::cout << root->value;
+		std::cout << " ";
+		writeInOrder(root->right);
+	}
 }

@@ -107,39 +107,39 @@ int maximum(No* root) {
 }
 
 int sucessor(No* root, int value) {
-	No* atual = search(root, value);
+	No* current = search(root, value);
 	
-	if (atual->right) {
-		return minimum(atual->right);
+	if (current->right) {
+		return minimum(current->right);
 	}
 
 	No* sucessor = NULL;
 
-	while (atual->parent) {
-		if (atual->parent->value < value) {
-			atual = atual->parent;
+	while (current->parent) {
+		if (current->parent->value < value) {
+			current = current->parent;
 		}
 		else{
-			return atual->parent->value;		
+			return current->parent->value;		
 		}
 	}
 	return -1;
 }
 
 int predecessor(No* root, int value) {
-	No* atual = search(root, value);
+	No* current = search(root, value);
 
-	if (atual->left) {
-		return maximum(atual->left);
+	if (current->left) {
+		return maximum(current->left);
 	}
 
-	while (atual->parent)
+	while (current->parent)
 	{
-		if (atual->parent->value > value) {
-			atual = atual->parent;
+		if (current->parent->value > value) {
+			current = current->parent;
 		}
 		else {
-			return atual->parent->value;		
+			return current->parent->value;		
 		}
 	}
 

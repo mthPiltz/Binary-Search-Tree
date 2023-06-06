@@ -85,7 +85,7 @@ No* ArvBinBusca::minimo() {
 }
 
 No* ArvBinBusca::minimo(No* x) {
-    No* temp = raiz;
+    No* temp = x;
 
     while (temp->esq)
     {
@@ -100,7 +100,7 @@ No* ArvBinBusca::maximo() {
 }
 
 No* ArvBinBusca::maximo(No* x) {
-    No* temp = raiz;
+    No* temp = x;
 
     while (temp->dir)
     {
@@ -117,9 +117,23 @@ No* ArvBinBusca::sucessor(No* x) {
 }
 
 No* ArvBinBusca::predecessor(No* x) {
-    No* temp = NULL;
-    return temp;
-    //TODO: implementar
+    No* temp = raiz;
+
+    if (temp->esq) {
+        return maximo(temp->esq);
+    }
+
+    while (temp->pai)
+    {
+        if (temp->pai->chave > x->chave) {
+            temp = temp->pai;
+        }
+        else {
+            return temp->pai;
+        }
+    }
+
+    return NULL;
 }
 
 void ArvBinBusca::insere(int chave) {

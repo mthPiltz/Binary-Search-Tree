@@ -203,7 +203,53 @@ bool ArvBinBusca::remove(int chave) {
 }
 
 void ArvBinBusca::remove(No* z) {
-    //TODO: implementar
+    if (z->esq == nullptr && z->dir == nullptr) {
+        No* pai = z->pai;
+        if (pai == nullptr) {
+            raiz = nullptr;  
+        }
+        else if (pai->esq == z) {
+            pai->esq = nullptr; 
+        }
+        else {
+            pai->dir = nullptr; 
+        }
+    }
+    else if (z->esq == nullptr || z->dir == nullptr) {
+        No* filho = (z->esq != nullptr) ? z->esq : z->dir;  
+        No* pai = z->pai;
+        if (pai == nullptr) {
+            raiz = filho;  
+        }
+        else if (pai->esq == z) {
+            pai->esq = filho; 
+        }
+        else {
+            pai->dir = filho; 
+        }
+    }
+    else {
+        No* no_sucessor = sucessor(z->dir); 
+        No* paiSucessor = no_sucessor->pai;
+
+        if (paiSucessor != z) {
+            paiSucessor->esq = no_sucessor->dir;
+            no_sucessor->dir = z->dir; 
+        }
+
+        no_sucessor->esq = z->esq;  
+
+        No* pai = z->pai;
+        if (pai == nullptr) {
+            raiz = no_sucessor;  
+        }
+        else if (pai->esq == z) {
+            pai->esq = no_sucessor;
+        }
+        else {
+            pai->dir = no_sucessor;  
+        }
+    }
 }
 
 void ArvBinBusca::limpa() {

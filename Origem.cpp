@@ -33,7 +33,7 @@ int main(void)
   No *suc = T.sucessor(raiz);
   printf("Sucessor da raiz: ");
   suc->escreve("\n");
-  return 0;
+
 
   printf("Sucessor do predecessor da raiz (== raiz): ");
   T.sucessor(pre)->escreve("\n");
@@ -46,8 +46,6 @@ int main(void)
   minimo->escreve("\n");
   printf("Máximo: ");
   maximo->escreve("\n");
-
-  return 0; //TODO: remover após implementar remoção
 
   T.remove(0); // Caso 1
   T.remove(13); // Caso 2

@@ -128,8 +128,6 @@ No* ArvBinBusca::sucessor(No* x) {
         }
     }
     return NULL;
-
-    return NULL;
 }
 
 No* ArvBinBusca::predecessor(No* x) {
@@ -179,13 +177,13 @@ void ArvBinBusca::insere(No* z) {
     }
 
     if (pai->chave < z->chave) {
-        z->pai = pai;
         pai->dir = z;
     }
     else {
         pai->esq = z;
-        z->pai = pai;
     }
+    
+    z->pai = pai;
 }
 
 void ArvBinBusca::transplante(No* u, No* v) {
@@ -203,9 +201,9 @@ bool ArvBinBusca::remove(int chave) {
 }
 
 void ArvBinBusca::remove(No* z) {
-    if (z->esq == nullptr && z->dir == nullptr) {
+    if (!z->esq && !z->dir) {
         No* pai = z->pai;
-        if (pai == nullptr) {
+        if (!pai) {
             raiz = nullptr;  
         }
         else if (pai->esq == z) {
@@ -215,10 +213,10 @@ void ArvBinBusca::remove(No* z) {
             pai->dir = nullptr; 
         }
     }
-    else if (z->esq == nullptr || z->dir == nullptr) {
+    else if (!z->esq || !z->dir) {
         No* filho = (z->esq != nullptr) ? z->esq : z->dir;  
         No* pai = z->pai;
-        if (pai == nullptr) {
+        if (!pai) {
             raiz = filho;  
         }
         else if (pai->esq == z) {
@@ -229,7 +227,7 @@ void ArvBinBusca::remove(No* z) {
         }
     }
     else {
-        No* no_sucessor = sucessor(z->dir); 
+        No* no_sucessor = sucessor(z); 
         No* paiSucessor = no_sucessor->pai;
 
         if (paiSucessor != z) {
@@ -240,7 +238,7 @@ void ArvBinBusca::remove(No* z) {
         no_sucessor->esq = z->esq;  
 
         No* pai = z->pai;
-        if (pai == nullptr) {
+        if (!pai) {
             raiz = no_sucessor;  
         }
         else if (pai->esq == z) {

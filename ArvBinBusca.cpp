@@ -64,9 +64,20 @@ No* ArvBinBusca::busca(int k) {
 }
 
 No* ArvBinBusca::busca(No* x, int k) {
-    No* temp = NULL;
-    return temp;
-    //TODO: implementar
+    if (x) {
+        if (x->chave == k){
+            return x;
+        }
+
+        if (x->chave < k){
+            return busca(x->dir, k);
+        }
+        else {
+            return busca(x->esq, k);
+        }
+    }    
+    
+    return NULL;
 }
 
 No* ArvBinBusca::minimo() {

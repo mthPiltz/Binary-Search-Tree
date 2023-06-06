@@ -111,7 +111,7 @@ No* ArvBinBusca::maximo(No* x) {
 }
 
 No* ArvBinBusca::sucessor(No* x) {
-    No* temp = raiz;
+    No* temp = x;
 
     if (temp->dir) {
         return minimo(temp->dir);
@@ -133,7 +133,7 @@ No* ArvBinBusca::sucessor(No* x) {
 }
 
 No* ArvBinBusca::predecessor(No* x) {
-    No* temp = raiz;
+    No* temp = x;
 
     if (temp->esq) {
         return maximo(temp->esq);
@@ -247,7 +247,7 @@ void ArvBinBusca::remove(No* z) {
             pai->esq = no_sucessor;
         }
         else {
-            pai->dir = no_sucessor;  
+            pai->dir = no_sucessor; 
         }
     }
 }

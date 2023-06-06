@@ -93,7 +93,6 @@ No* ArvBinBusca::minimo(No* x) {
     }
 
     return temp;
-    //TODO: implementar
 }
 
 No* ArvBinBusca::maximo() {
@@ -101,9 +100,14 @@ No* ArvBinBusca::maximo() {
 }
 
 No* ArvBinBusca::maximo(No* x) {
-    No* temp = NULL;
+    No* temp = raiz;
+
+    while (temp->dir)
+    {
+        temp = temp->dir;
+    }
+
     return temp;
-    //TODO: implementar
 }
 
 No* ArvBinBusca::sucessor(No* x) {

@@ -26,6 +26,8 @@ int main(void)
   printf("Raiz: ");
   raiz->escreve("\n");
 
+  return 0;
+
   No *pre = T.predecessor(raiz);
   printf("Predecessor da raiz: ");
   pre->escreve("\n");

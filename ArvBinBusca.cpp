@@ -85,7 +85,13 @@ No* ArvBinBusca::minimo() {
 }
 
 No* ArvBinBusca::minimo(No* x) {
-    No* temp = NULL;
+    No* temp = raiz;
+
+    while (temp->esq)
+    {
+        temp = temp->esq;
+    }
+
     return temp;
     //TODO: implementar
 }

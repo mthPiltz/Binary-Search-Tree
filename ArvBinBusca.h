@@ -46,6 +46,6 @@ private:
 
 	void copia(const ArvBinBusca& T); // copia uma árvore T para a atual a partir da raiz,
 									  // usada no construtor de cópia e no operador de atribuição
-	void copia(No* dest, No* orig);   // copia um nó e os descendentes recursivamente
+	void copia(No*& dest, No* orig);   // copia um nó e os descendentes recursivamente
 };
 

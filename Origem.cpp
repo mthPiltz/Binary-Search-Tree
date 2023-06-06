@@ -54,8 +54,6 @@ int main(void)
   printf("T:\n");
   T.escreve();
 
-  return 0; //TODO: remover após implementar construtor de cópia e operador de atribuição
-  
   ArvBinBusca T2(T); // construtor de cópia
   T2.insere(30);
   printf("T:\n");

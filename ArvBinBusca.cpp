@@ -1,4 +1,6 @@
 ﻿#include "ArvBinBusca.h"
+#include <stack>
+#include <queue>
 
 ArvBinBusca::ArvBinBusca() {
     raiz = NULL;
@@ -36,7 +38,7 @@ void ArvBinBusca::escreve() {
     escreve("", raiz);
 }
 
-void ArvBinBusca::escreve(const std::string& prefixo, No* x) {
+void ArvBinBusca::escreve(const string& prefixo, No* x) {
     if (x == NULL)
         return;
 
@@ -225,6 +227,7 @@ void ArvBinBusca::remove(No* z) {
         else {
             pai->dir = filho; 
         }
+        filho->pai = pai;
     }
     else {
         No* no_sucessor = sucessor(z); 
@@ -240,6 +243,7 @@ void ArvBinBusca::remove(No* z) {
         No* pai = z->pai;
         if (!pai) {
             raiz = no_sucessor;  
+            raiz->pai = NULL;
         }
         else if (pai->esq == z) {
             pai->esq = no_sucessor;
@@ -247,6 +251,8 @@ void ArvBinBusca::remove(No* z) {
         else {
             pai->dir = no_sucessor; 
         }
+        no_sucessor->dir->pai = no_sucessor;
+        no_sucessor->esq->pai = no_sucessor;
     }
 }
 
@@ -256,7 +262,11 @@ void ArvBinBusca::limpa() {
 }
 
 void ArvBinBusca::limpa(No* x) {
-    //TODO: implementar
+    if (x) {
+        limpa(x->esq);
+        limpa(x->dir);
+        free(x);
+    }
 }
 
 void ArvBinBusca::copia(const ArvBinBusca& T) {
@@ -268,6 +278,15 @@ void ArvBinBusca::copia(const ArvBinBusca& T) {
     }
 }
 
-void ArvBinBusca::copia(No* dest, No* orig) {
-    //TODO: implementar
+void ArvBinBusca::copia(No*& dest, No* orig) {
+    if (orig) {
+        dest = (No*)calloc(1, sizeof(No));
+        dest->esq = orig->esq;
+        dest->dir = orig->dir;
+        dest->pai = orig->pai;
+        dest->chave = orig->chave;
+
+        copia(orig->esq, dest->esq);
+        copia(orig->dir, dest->dir);
+    }
 }

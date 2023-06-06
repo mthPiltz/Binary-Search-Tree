@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <iostream>
 #include <string>
-#include "../trabalho-base-professor/No.h"
+#include "No.h"
+using namespace std;
 
 class ArvBinBusca
 {
@@ -31,7 +32,7 @@ private:
 	No* raiz;
 
 	void escreve_ordenado(No* x); // escreve em percurso em-ordem
-	void escreve(const std::string& prefixo, No* x);
+	void escreve(const string& prefixo, No* x);
 
 	No* busca(No* x, int k); // Parte recursiva da busca
 	No* minimo(No* x); // Parte recursiva de minimo

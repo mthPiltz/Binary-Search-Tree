@@ -5,9 +5,9 @@ Aluno(s): Matheus Piltz Scariot
 
 */
 #include <string>
-#include "../trabalho-base-professor/ArvBinBusca.h"
+#include "ArvBinBusca.h"
 
-using std::string;
+
 
 int main(void)
 {
@@ -15,12 +15,12 @@ int main(void)
   int v[] = {10, 25, 0, 16, 20, 9, 15, 6, 14, 7, 18, 12, 22, 19, 3, 13};
   
   for (const auto &x : v)
-    T.insere(x); //TODO: implemente primeiro o metodo insere
+    T.insere(x); 
   
   printf("T:\n");
   T.escreve();
   printf("Valores de T em ordem crescente: ");
-  T.escreve_ordenado(); //TODO: implemente depois escreve_ordenado
+  T.escreve_ordenado(); 
 
   return 0; //TODO: remover após implementar minimo, maximo, sucessor, predecessor
 

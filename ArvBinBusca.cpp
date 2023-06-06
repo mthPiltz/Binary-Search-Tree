@@ -26,8 +26,8 @@ void ArvBinBusca::escreve_ordenado() {
 void ArvBinBusca::escreve_ordenado(No* root) {
     if (root != nullptr) {
         escreve_ordenado(root->esq);
-        std::cout << root->chave;
-        std::cout << " ";
+        cout << root->chave;
+        cout << " ";
         escreve_ordenado(root->dir);
     }
 }
@@ -63,46 +63,83 @@ No* ArvBinBusca::busca(int k) {
     return busca(raiz, k);
 }
 
-//No* ArvBinBusca::busca(No* x, int k) {
-//    //TODO: implementar
-//}
-//
-//No* ArvBinBusca::minimo() {
-//    return raiz ? minimo(raiz) : NULL;
-//}
-//
-//No* ArvBinBusca::minimo(No* x) {
-//    //TODO: implementar
-//}
-//
-//No* ArvBinBusca::maximo() {
-//    return raiz ? maximo(raiz) : NULL;
-//}
-//
-//No* ArvBinBusca::maximo(No* x) {
-//    //TODO: implementar
-//}
-//
-//No* ArvBinBusca::sucessor(No* x) {
-//    //TODO: implementar
-//}
-//
-//No* ArvBinBusca::predecessor(No* x) {
-//    //TODO: implementar
-//}
+No* ArvBinBusca::busca(No* x, int k) {
+    No* temp = NULL;
+    return temp;
+    //TODO: implementar
+}
 
-//void ArvBinBusca::insere(int chave) {
-//    No* z = new No(chave);
-//    insere(z);
-//}
-//
-//void ArvBinBusca::insere(No* z) {
-//    //TODO: implementar
-//}
+No* ArvBinBusca::minimo() {
+    return raiz ? minimo(raiz) : NULL;
+}
 
-//void ArvBinBusca::transplante(No* u, No* v) {
-//    //TODO: implementar
-//}
+No* ArvBinBusca::minimo(No* x) {
+    No* temp = NULL;
+    return temp;
+    //TODO: implementar
+}
+
+No* ArvBinBusca::maximo() {
+    return raiz ? maximo(raiz) : NULL;
+}
+
+No* ArvBinBusca::maximo(No* x) {
+    No* temp = NULL;
+    return temp;
+    //TODO: implementar
+}
+
+No* ArvBinBusca::sucessor(No* x) {
+    No* temp = NULL;
+    return temp;
+    //TODO: implementar
+}
+
+No* ArvBinBusca::predecessor(No* x) {
+    No* temp = NULL;
+    return temp;
+    //TODO: implementar
+}
+
+void ArvBinBusca::insere(int chave) {
+    No* z = new No(chave);
+    insere(z);
+}
+
+void ArvBinBusca::insere(No* z) {
+    if (!raiz) {
+        raiz = z;
+        return;
+    }
+
+    No* atual = raiz;
+    No* pai = NULL;
+
+    while (atual)
+    {
+        pai = atual;
+
+        if (atual->chave < z->chave) {
+            atual = atual->dir;
+        }
+        else {
+            atual = atual->esq;
+        }
+    }
+
+    if (pai->chave < z->chave) {
+        z->pai = pai;
+        pai->dir = z;
+    }
+    else {
+        pai->esq = z;
+        z->pai = pai;
+    }
+}
+
+void ArvBinBusca::transplante(No* u, No* v) {
+    //TODO: implementar
+}
 
 bool ArvBinBusca::remove(int chave) {
     No* z = busca(raiz, chave);
@@ -114,18 +151,18 @@ bool ArvBinBusca::remove(int chave) {
     return true;
 }
 
-//void ArvBinBusca::remove(No* z) {
-//    //TODO: implementar
-//}
+void ArvBinBusca::remove(No* z) {
+    //TODO: implementar
+}
 
 void ArvBinBusca::limpa() {
     limpa(raiz);
     raiz = NULL;
 }
 
-//void ArvBinBusca::limpa(No* x) {
-//    //TODO: implementar
-//}
+void ArvBinBusca::limpa(No* x) {
+    //TODO: implementar
+}
 
 void ArvBinBusca::copia(const ArvBinBusca& T) {
     if (T.raiz == NULL)
@@ -136,6 +173,6 @@ void ArvBinBusca::copia(const ArvBinBusca& T) {
     }
 }
 
-//void ArvBinBusca::copia(No* dest, No* orig) {
-//    //TODO: implementar
-//}
+void ArvBinBusca::copia(No* dest, No* orig) {
+    //TODO: implementar
+}

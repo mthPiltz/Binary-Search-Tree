@@ -111,9 +111,25 @@ No* ArvBinBusca::maximo(No* x) {
 }
 
 No* ArvBinBusca::sucessor(No* x) {
-    No* temp = NULL;
-    return temp;
-    //TODO: implementar
+    No* temp = raiz;
+
+    if (temp->dir) {
+        return minimo(temp->dir);
+    }
+
+    No* sucessor = NULL;
+
+    while (temp->pai) {
+        if (temp->pai->chave < x->chave) {
+            temp = temp->pai;
+        }
+        else {
+            return temp->pai;
+        }
+    }
+    return NULL;
+
+    return NULL;
 }
 
 No* ArvBinBusca::predecessor(No* x) {

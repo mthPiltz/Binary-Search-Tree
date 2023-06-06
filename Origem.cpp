@@ -30,10 +30,10 @@ int main(void)
   No *pre = T.predecessor(raiz);
   printf("Predecessor da raiz: ");
   pre->escreve("\n");
-  return 0;
   No *suc = T.sucessor(raiz);
   printf("Sucessor da raiz: ");
   suc->escreve("\n");
+  return 0;
 
   printf("Sucessor do predecessor da raiz (== raiz): ");
   T.sucessor(pre)->escreve("\n");

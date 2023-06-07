@@ -1,6 +1,4 @@
 ﻿#include "ArvBinBusca.h"
-#include <stack>
-#include <queue>
 
 ArvBinBusca::ArvBinBusca() {
     raiz = NULL;

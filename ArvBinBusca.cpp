@@ -243,7 +243,6 @@ void ArvBinBusca::remove(No* z) {
         No* pai = z->pai;
         if (!pai) {
             raiz = no_sucessor;  
-            raiz->pai = NULL;
         }
         else if (pai->esq == z) {
             pai->esq = no_sucessor;
@@ -253,6 +252,7 @@ void ArvBinBusca::remove(No* z) {
         }
         no_sucessor->dir->pai = no_sucessor;
         no_sucessor->esq->pai = no_sucessor;
+        no_sucessor->pai = pai;
     }
 }
 

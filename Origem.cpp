@@ -51,6 +51,7 @@ int main(void)
   T.remove(13); // Caso 2
   T.remove(10); // Caso 3b + 3a
 
+
   printf("T:\n");
   T.escreve();
 
